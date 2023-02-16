@@ -11,7 +11,7 @@ const salarypost = new mongoose.Schema({
         require: true
     },
     month:{
-        type: String,
+        type: Date,
         require: true
     }
 })
