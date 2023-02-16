@@ -6,11 +6,16 @@ const salarypost = require('./model/administration');
 const mongoose = require("mongoose");
 
 connecttoMongo();
-app.use(express.json())
+app.use(express.json());
+app.use(express.static(__dirname + '/public'));
+app.set("view engine","hbs");
 
 app.listen(port,() => {
     console.log(`app started in port http://localhost:${port}`)
 });
+app.get("/",(req,res)=>{
+  res.render("index");
+})
 
 app.get("/administration",(req,res)=>{
     res.send("ok started");
