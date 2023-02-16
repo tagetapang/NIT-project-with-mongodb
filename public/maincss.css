@@ -1,0 +1,16 @@
+.form-container{
+    display: flex;
+    flex-direction: column;
+    max-width: 80vw;
+    margin: 0px auto;
+    margin-top: 50px;
+
+}
+.isinput{
+    margin: 10px 0px;
+    padding: 12px 12px;
+}
+.submitbtn{
+    display: block;
+    width: 150px;
+}
