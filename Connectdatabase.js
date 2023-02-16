@@ -8,5 +8,5 @@ const connecttoMongo = async () =>{
         console.log("faild to connect to mongodb",err);
     }
 
-}
+};
 module.exports = connecttoMongo;
