@@ -17,13 +17,13 @@ app.listen(port,() => {
     console.log(`app started in port http://localhost:${port}`)
 });
 app.get("/",(req,res)=>{
-  res.send("go to either localhost3000/administration or localhost3000/showsalary");
+  res.render("home");
 })
 app.get("/administration",(req,res)=>{
   res.render("adminsite");
 });
-app.get("/showsalary",(req,res)=>{
-  res.render("showsalarysite");
+app.get("/salary",(req,res)=>{
+  res.render("salarysite");
 })
 
 // _____________________________________________administration______________________________________________________
@@ -53,15 +53,15 @@ app.post("/administration", async(req,res)=>{
 // ________________________________________________________________________________________________________________//
 // __________________________________checksalary______________________________________________________________________________//
 
-app.post("/showsalary",async(req,res)=>{
+app.post("/salary",async(req,res)=>{
     try {
         let user = await salarypost.findOne({name: req.body.name,month: req.body.month});
         if(user){
-           res.json({name: user.name , salary: user.salary,month: user.month});
+           res.render("salaryresult",{user: user});
         }
         else{
             alert("user doesn't exist");
-            res.render("showsalarysite");
+            res.render("salarysite");
         }
         
     } catch (error) {
