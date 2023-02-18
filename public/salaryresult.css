@@ -1,6 +1,24 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: large;
+}
 .container{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     border: 2px solid black;
+    max-width: 80vw;
+    margin: 150px auto;
+    box-shadow: 4px 4px 3px black;
+}
+.dynamicobj{
+    margin: 8px 0px 8px 50px;
+    
+}
+#h1tag{
+    margin: 20px 40px;
 }
