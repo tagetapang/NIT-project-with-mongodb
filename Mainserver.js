@@ -5,9 +5,14 @@ const app = express();
 
 const connecttoMongo = require('./Connectdatabase');
 const salarypost = require('./model/administration');
+const signupadmin = require('./model/adminsignin');
 const mongoose = require("mongoose");
 
 connecttoMongo();
+signupadmin.create({
+  name: "administration",
+  password: "imadmin"
+});
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(express.static(__dirname + '/public'));
@@ -19,14 +24,17 @@ app.listen(port,() => {
 app.get("/",(req,res)=>{
   res.render("home");
 })
-app.get("/administration",(req,res)=>{
-  res.render("adminsite");
-});
-app.get("/salary",(req,res)=>{
-  res.render("salarysite");
+
+// _____________________________________________signin__________________________________________________________
+app.get("/signinadmin",(req,res)=>{
+  
 })
 
 // _____________________________________________administration______________________________________________________
+app.get("/administration",(req,res)=>{
+  res.render("adminsite");
+});
+
 
 app.post("/administration", async(req,res)=>{
     try {
@@ -52,6 +60,9 @@ app.post("/administration", async(req,res)=>{
 
 // ________________________________________________________________________________________________________________//
 // __________________________________checksalary______________________________________________________________________________//
+app.get("/salary",(req,res)=>{
+  res.render("salarysite");
+})
 
 app.post("/salary",async(req,res)=>{
     try {
