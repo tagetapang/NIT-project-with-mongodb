@@ -15,4 +15,4 @@ const salarypost = new mongoose.Schema({
         require: true
     }
 })
-module.exports = mongoose.model("salarypost",salarypost);
+module.exports = mongoose.model("salarypostdata",salarypost);
