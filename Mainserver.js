@@ -1,93 +1,33 @@
-const express = require('express');
+const express = require("express");
 const port = 3000;
-const alert = require("alert");
+const path = require("path");
 const app = express();
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
 
-const connecttoMongo = require('./Connectdatabase');
-const salarypost = require('./model/administration');
-const signupadmin = require('./model/adminsignin');
-const mongoose = require("mongoose");
+const connecttoMongo = require("./Connectdatabase");
+const signadmin = require("./model/adminsignin");
 
 connecttoMongo();
-signupadmin.create({
-  name: "administration",
-  password: "imadmin"
-});
+signadmin.create({
+  name:"admin",
+  password:"2"
+})
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
-app.use(express.static(__dirname + '/public'));
-app.set("view engine","hbs");
+app.set("views", __dirname + "/views/");
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, "public")));
 
-app.listen(port,() => {
-    console.log(`app started in port http://localhost:${port}`)
+
+
+app.set("view engine", "hbs");
+
+app.listen(port, () => {
+  console.log(`app started in port http://localhost:${port}`);
 });
-app.get("/",(req,res)=>{
-  res.render("home");
-})
-
-// _____________________________________________signin__________________________________________________________
-app.get("/signinadmin",(req,res)=>{
-  
-})
-
-// _____________________________________________administration______________________________________________________
-app.get("/administration",(req,res)=>{
-  res.render("adminsite");
+app.get("/", (req, res) => {
+  res.render("./home");
 });
 
-
-app.post("/administration", async(req,res)=>{
-    try {
-        let user = await salarypost.findOne({ name: req.body.name });
-        
-        if (user) {
-          alert("user already exist");
-          return res.render("adminsite");
-        }
-        user = await salarypost.create({
-            name: req.body.name,
-            salary: req.body.salary,
-            month: req.body.month,
-        });
-        alert("data successfully recorded");
-        res.render("adminsite");
-       
-      } catch (error) {
-        console.log(error.message);
-      }
-
-});
-
-// ________________________________________________________________________________________________________________//
-// __________________________________checksalary______________________________________________________________________________//
-app.get("/salary",(req,res)=>{
-  res.render("salarysite");
-})
-
-app.post("/salary",async(req,res)=>{
-    try {
-        let user = await salarypost.findOne({name: req.body.name,month: req.body.month});
-        if(user){
-          let temp = user.month;
-          let convertostring = temp.toString();
-          let spliting = convertostring.split(" ",4);
-          const mymonth = spliting[0] +" "+ spliting[1] +" "+ spliting[2] +" "+ spliting[3];
-          const obj = {
-            name: user.name,
-            salary: user.salary,
-            month: mymonth
-          }
-           res.render("salaryresult",{user: obj});
-        }
-        else{
-            alert("user doesn't exist");
-            res.render("salarysite");
-        }
-        
-    } catch (error) {
-      console.log(error.message);
-        
-    }
-
-})
-// ________________________________________________________________________________________________________________
+app.use("/administration", require("./Routes/administration"));
+app.use("/client", require("./Routes/client"));

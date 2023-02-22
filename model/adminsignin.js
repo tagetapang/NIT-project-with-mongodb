@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
 
-const signupadmin = new mongoose.Schema({
+const signadmin = new mongoose.Schema({
     name:{
-        type: text,
+        type: String,
         require: true
     },
     password:{
-        type: text,
+        type: String,
         require: true
     }
 })
 
-module.exports = mongoose.model("signupdata",signupadmin);
+module.exports = mongoose.model("signupdata",signadmin);
