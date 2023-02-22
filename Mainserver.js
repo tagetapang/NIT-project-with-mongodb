@@ -9,10 +9,8 @@ const connecttoMongo = require("./Connectdatabase");
 const signadmin = require("./model/adminsignin");
 
 connecttoMongo();
-signadmin.create({
-  name:"admin",
-  password:"2"
-})
+createadmin();
+
 app.use(express.json());
 app.set("views", __dirname + "/views/");
 app.use(express.urlencoded({ extended: false }));
@@ -29,5 +27,15 @@ app.get("/", (req, res) => {
   res.render("./home");
 });
 
+async function createadmin(){
+  let user = await signadmin.findOne({name: "admin"});
+  if(user){
+    return;
+  }
+  signadmin.create({
+    name:"admin",
+    password:"this is admin"
+  })
+}
 app.use("/administration", require("./Routes/administration"));
 app.use("/client", require("./Routes/client"));
