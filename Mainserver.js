@@ -2,8 +2,8 @@ const express = require("express");
 const port = 3000;
 const path = require("path");
 const app = express();
-const cookieParser = require("cookie-parser");
-app.use(cookieParser());
+
+
 
 const connecttoMongo = require("./Connectdatabase");
 const signadmin = require("./model/adminsignin");

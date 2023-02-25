@@ -3,6 +3,9 @@ const authrouter = express.Router();
 const signadmin = require("../model/adminsignin");
 const salarypost = require("../model/administration");
 const alert = require("alert");
+const protectroute = require("../middleware");
+const cookieParser = require("cookie-parser");
+authrouter.use(cookieParser());
 
 // _____________________________________________signin__________________________________________________________
 authrouter.get("/signin", (req, res) => {
@@ -18,18 +21,20 @@ authrouter.post("/signin", async (req, res) => {
       alert("please enter correct credentials");
       res.render("./admin/adminsignin");
     } else {
+      res.cookie('islogedin',true,{maxAge: 900000,httpOnly: true});
       res.redirect("/administration/salaryallot");
     }
   } catch (error) {
     res.send(error.message);
   }
 });
+// __________________________________________________alot salary________________________________________________
 
-authrouter.get("/salaryallot", (req, res) => {
+authrouter.get("/salaryallot",protectroute,(req, res) => {
   res.render("./admin/adminsite");
 });
 
-authrouter.post("/salaryallot", async (req, res) => {
+authrouter.post("/salaryallot",protectroute, async (req, res) => {
   try {
     let user = await salarypost.findOne({ name: req.body.name });
 
@@ -48,5 +53,10 @@ authrouter.post("/salaryallot", async (req, res) => {
     console.log(error.message);
   }
 });
+// ___________________________________________________________log out__________________________________________________
+authrouter.get("/logout",(req,res)=>{
+  res.cookie('islogedin','',{maxAge:1});
+  res.redirect("/administration/signin")
+})
 
 module.exports = authrouter;
