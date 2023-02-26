@@ -6,6 +6,12 @@
     margin-top: 50px;
 
 }
+.container{
+    padding: 25px 25px;
+    width: 80vw;
+    background-color: antiquewhite;
+    margin: 0 auto;
+}
 .isinput{
     margin: 10px 0px;
     padding: 12px 12px;
@@ -21,4 +27,10 @@
 }
 h1{
     text-align: center;
+}
+.headers{
+    text-align: center;
+    background-color: antiquewhite;
+    color: rgb(0, 0, 0);
+    margin: 2px 2px;
 }
