@@ -35,22 +35,17 @@ authrouter.get("/salaryallot",protectroute,(req, res) => {
 });
 
 authrouter.post("/salaryallot",protectroute, async (req, res) => {
-  try {
-    let user = await salarypost.findOne({ name: req.body.name });
-
-    if (user) {
-      alert("user already exist");
-      return res.render("./admin/adminsite");
-    }
-    user = await salarypost.create({
-      name: req.body.name,
-      salary: req.body.salary,
-      month: req.body.month,
-    });
-    alert("data successfully recorded");
-    res.render("./admin/adminsite");
-  } catch (error) {
-    console.log(error.message);
+  let user = await salarypost.findOne({name: req.body.name,month: req.body.month});
+  if(user){
+    await salarypost.findOneAndUpdate({name: req.body.name},{salary: req.body.salary});
+    alert("sucessfully updated data");
+    res.redirect("/administration/salaryallot");
+  }
+  else{
+    objwithsalary = {name: req.body.name,salary: req.body.salary,month: req.body.month};
+    salarypost.create(objwithsalary);
+    alert("successfully created data");
+    res.redirect("/administration/salaryallot");
   }
 });
 // ___________________________________________________________log out__________________________________________________
