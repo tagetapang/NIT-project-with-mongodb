@@ -1,10 +1,12 @@
-const express = require("express");
+
+const alert = require("alert");
 function protectroute(req,res,next){
     if(req.cookies.islogedin){
         next();
     }
     else{
-        res.status(404).send("<h1>not allowed</h1>");
+        alert("PLEASE LOGIN FIRST");
+        res.redirect("/administration/signin");
     }
 }
 module.exports = protectroute;

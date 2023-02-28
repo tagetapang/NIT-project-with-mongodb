@@ -3,6 +3,7 @@ const authrouter = express.Router();
 const signadmin = require("../model/adminsignin");
 const salarypost = require("../model/administration");
 const alert = require("alert");
+const employee = require("../model/employes");
 const protectroute = require("../middleware");
 const cookieParser = require("cookie-parser");
 authrouter.use(cookieParser());
@@ -30,8 +31,10 @@ authrouter.post("/signin", async (req, res) => {
 });
 // __________________________________________________alot salary________________________________________________
 
-authrouter.get("/salaryallot",protectroute,(req, res) => {
-  res.render("./admin/adminsite");
+authrouter.get("/salaryallot",protectroute,async(req, res) => {
+  let user = await employee.find();
+  console.log(user);
+  res.render("./admin/adminsite",{user:user});
 });
 
 authrouter.post("/salaryallot",protectroute, async (req, res) => {
@@ -48,6 +51,36 @@ authrouter.post("/salaryallot",protectroute, async (req, res) => {
     res.redirect("/administration/salaryallot");
   }
 });
+// __________________________________________________________create employee____________________________________
+authrouter.post("/createemploy",async(req,res)=>{
+  const {name,password,cpassword} = req.body;
+  try {
+    
+    let user = await employee.findOne({name: req.body.name})
+    if(user){
+      alert("employee already exists");
+      res.redirect("/administration/salaryallot");
+    }
+    else{
+      if(password !== cpassword){
+        alert("password doesn't match please refill")
+        res.redirect("/administration/salaryallot");
+      }
+      else{
+        employee.create({
+          name: req.body.name,
+          password: req.body.password
+        })
+        alert("employee account created successfully");
+        res.redirect("/administration/salaryallot");
+      }
+  
+    }
+  } catch (error) {
+    res.send("server error");
+    
+  }
+})
 // ___________________________________________________________log out__________________________________________________
 authrouter.get("/logout",(req,res)=>{
   res.cookie('islogedin','',{maxAge:1});

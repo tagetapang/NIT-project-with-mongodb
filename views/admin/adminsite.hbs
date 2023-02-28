@@ -7,18 +7,67 @@
     <link rel="stylesheet" href="/maincss.css" />
   </head>
   <body>
-    <h1 class="headers">administration site</h1>
+    <h1 class="headers">administration site
+      <a href="/administration/logout"><button class="submitbtn">log out</button></a></h1>
     <div class="container">
-
-
-      <form class="form-container" action="/administration/salaryallot" method="post">
-        <input class="isinput" type="text" name="name" id="name" placeholder="enter name here" />
-        <input class="isinput" type="number" name="salary" id="salary" placeholder="enter salary here" />
-        <input class="isinput" type="month" name="month" id="month" placeholder="enter month here" />
-        <button class= "submitbtn" type="submit" value="data-entry">submit data</button>
+      <h1 style="text-align:center;">allocate salary to employee here</h1>
+      <form
+        class="form-container"
+        action="/administration/salaryallot"
+        method="post"
+      >
+        <select name="name" class="isinput" id="">  
+          {{#each user}}
+            <option value="">{{name}}</option>
+          {{/each}}
+        </select>
+        <input
+          class="isinput"
+          type="number"
+          name="salary"
+          id="salary"
+          placeholder="enter salary here"
+        />
+        <input
+          class="isinput"
+          type="month"
+          name="month"
+          id="month"
+          placeholder="enter month here"
+        />
+        <button class="submitbtn" type="submit" value="data-entry">submit data</button>
       </form>
-      <a href="/administration/logout"><button class="submitbtn">log out</button></a>
     </div>
-   
+    <div class="container">
+      <h1 style="text-align:center;">create new employee account here</h1>
+      <form
+        action="/administration/createemploy"
+        class="form-container"
+        method="post"
+      >
+        <input
+          type="text"
+          class="isinput"
+          name="name"
+          id="name"
+          placeholder="enter employ name"
+        />
+        <input
+          type="password"
+          class="isinput"
+          name="password"
+          id="password"
+          placeholder="set employ password"
+        />
+        <input
+          type="password"
+          class="isinput"
+          name="cpassword"
+          placeholder="confirm password"
+        />
+        <button class="submitbtn" class="submitbtn" type="submit">create account</button>
+      </form>
+    </div>
+
   </body>
 </html>
