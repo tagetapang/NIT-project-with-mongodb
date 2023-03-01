@@ -33,7 +33,6 @@ authrouter.post("/signin", async (req, res) => {
 
 authrouter.get("/salaryallot",protectroute,async(req, res) => {
   let user = await employee.find();
-  console.log(user);
   res.render("./admin/adminsite",{user:user});
 });
 

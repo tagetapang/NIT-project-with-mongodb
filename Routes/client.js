@@ -2,6 +2,7 @@ const express = require("express");
 const clientrouter = express.Router();
 const salarypost = require("../model/administration");
 const alert = require("alert");
+const employee = require("../model/employes");
 
 clientrouter.get("/salary", (req, res) => {
   res.render("./client/salarysite");
@@ -9,29 +10,74 @@ clientrouter.get("/salary", (req, res) => {
 
 clientrouter.post("/salary", async (req, res) => {
   try {
-    let user = await salarypost.findOne({
-      name: req.body.name,
-      month: req.body.month,
-    });
-    if (user) {
-      let temp = user.month;
-      let convertostring = temp.toString();
-      let spliting = convertostring.split(" ", 4);
-      const mymonth =
-        spliting[0] + " " + spliting[1] + " " + spliting[2] + " " + spliting[3];
-      const obj = {
-        name: user.name,
-        salary: user.salary,
-        month: mymonth,
-      };
-      res.render("./client/salaryresult", { user: obj });
-    } else {
-      alert("user doesn't exist");
-      res.render("./client/salarysite");
+    let user = await employee.findOne({name: req.body.name,password: req.body.password});
+   
+    if(user){
+      let userdata = await salarypost.findOne({name: req.body.name,month: req.body.month});
+      if(userdata){
+        let temp = userdata.month;
+            let convertostring = temp.toString();
+            let spliting = convertostring.split(" ", 4);
+            const mymonth =
+              spliting[0] + " " + spliting[1] + " " + spliting[2] + " " + spliting[3];
+            const obj = {
+              name: userdata.name,
+              salary: userdata.salary,
+              month: mymonth,
+            };
+        res.render("./client/salaryresult",{ user: obj});
+      }
+      else{
+        alert("no salary data for this user or month");
+        res.render("./client/salarysite");
+      }
     }
+    else{
+      alert("please give correct credentials");
+      res.render("./client/salarysite");
+      
+    }
+    
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
   }
+  
+ 
 });
 // ________________________________________________________________________________________________________________
 module.exports = clientrouter;
+
+// if(user && req.body.month == null){
+//   let userdata = await salarypost.find({name: req.body.name});
+//   if(userdata){
+//     res.render("./client/salaryresult", { user: userdata });
+//   }
+//   else{
+//     alert("no salary data for this user");
+//   }
+// }
+
+// try {
+//   let user = await salarypost.findOne({
+//     name: req.body.name,
+//     month: req.body.month,
+//   });
+//   if (user) {
+//     let temp = user.month;
+//     let convertostring = temp.toString();
+//     let spliting = convertostring.split(" ", 4);
+//     const mymonth =
+//       spliting[0] + " " + spliting[1] + " " + spliting[2] + " " + spliting[3];
+//     const obj = {
+//       name: user.name,
+//       salary: user.salary,
+//       month: mymonth,
+//     };
+//     res.render("./client/salaryresult", { user: obj });
+//   } else {
+//     alert("user doesn't exist");
+//     res.render("./client/salarysite");
+//   }
+// } catch (error) {
+//   console.log(error.message);
+// }
