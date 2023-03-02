@@ -23,8 +23,9 @@ clientrouter.post("/salary", async (req, res) => {
     }
     else{
       let userdata = await salarypost.findOne({name: req.body.name,month: req.body.month});
+      const arryuserdata = [userdata]
       if(userdata){
-        res.render("./client/salaryresult",{user: userdata});
+        res.render("./client/salaryresult",{user: arryuserdata});
       }
       else{
         alert("no salary data exists on this month");
