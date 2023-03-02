@@ -11,8 +11,9 @@ const salarypost = new mongoose.Schema({
         require: true
     },
     month:{
-        type: Date,
+        type: String,
         require: true
     }
 })
+
 module.exports = mongoose.model("salarypostdata",salarypost);
