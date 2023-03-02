@@ -7,14 +7,14 @@
     <link rel="stylesheet" href="/maincss.css">
   </head>
   <body>
-    <h1 class="headers">salary site</h1>
+    <h1 class="headers">salary site <a href="/" style="text-decoration: none;"><button class="submitbtn">home</button></a></h1>
     <div class="container">
       <h2 style="text-align: center;">enter username and password given by administration</h2>
 
       <form action="/client/salary" class="form-container" method="POST">
         <input class="isinput" type="text" name="name" id="name" placeholder="enter name here" />
-        <input type="password" name="password" placeholder="enter password here">
-        <input type="month" name="month" id="month">
+        <input class="isinput" type="password" name="password" placeholder="enter password here">
+        <input  class="isinput"type="month" name="month"  id="month">
         <button class="submitbtn"type="submit">check salary </button>
       </form>
 
