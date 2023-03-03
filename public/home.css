@@ -8,7 +8,7 @@
     flex-direction: column;
     width: 80vw;
     align-items: center;
-    background-color: antiquewhite;
+    background-color: #F7C8E0;
 }
 h1{
     margin: 23px 0;
@@ -21,17 +21,18 @@ h1{
 .btn{
     margin: 12px 12px;
     padding: 7px 12px;
-    border-radius: 12px;
-    color: white;
-    background-color: black;
+    border: 2px solid black;
+    border-radius: 12PX;
+    color: rgb(253, 252, 252);
+    background-color: #000000;
 
 }
 .btn a{
     text-decoration: none;
-    color: white;
+    color: rgb(0, 0, 0);
 }
 .secondc{
-    background-color: antiquewhite;
+    background-color: #F7C8E0;
     margin: 2px auto;
     width: 80vw;
 }
@@ -40,4 +41,21 @@ h1{
 }
 .secondc ul{
     margin-left: 23px;
+}
+.navbar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #F7C8E0;
+    padding-left: 5vw;
+    width: 94vw;
+    margin: 2px auto;
+    justify-content: left;
+    
+}
+.navbar h1{
+    text-align: center;
+}
+.navbar img{
+    width: 110px;
 }

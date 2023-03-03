@@ -33,3 +33,21 @@ body{
 #h1tag{
     margin: 20px 40px;
 }
+
+.navbar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #F7C8E0;
+    padding-left: 5vw;
+    width: 94vw;
+    margin: 2px auto;
+    justify-content: left;
+    
+}
+.navbar h1{
+    text-align: center;
+}
+.navbar img{
+    width: 110px;
+}

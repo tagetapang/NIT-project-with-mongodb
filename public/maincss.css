@@ -9,7 +9,7 @@
 .container{
     padding: 25px 25px;
     width: 80vw;
-    background-color: antiquewhite;
+    background-color: #F7C8E0;
     margin: 14px auto;
 }
 .isinput{
@@ -18,7 +18,7 @@
     border: 1px solid black;
     width: 60vw;
     border-radius: 12px;
-    color: black;
+    color: #000000;
 }
 .submitbtn{
     color: rgb(255, 255, 255);
@@ -34,7 +34,25 @@ h1{
 }
 .headers{
     text-align: center;
-    background-color: antiquewhite;
+    background-color:#F7C8E0 ;
     color: rgb(0, 0, 0);
     margin: 2px 2px;
+}
+
+.navbar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #F7C8E0;
+    padding-left: 5vw;
+    width: 94vw;
+    margin: 2px auto;
+    justify-content: left;
+    
+}
+.navbar h1{
+    text-align: center;
+}
+.navbar img{
+    width: 110px;
 }
