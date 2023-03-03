@@ -17,3 +17,4 @@ const salarypost = new mongoose.Schema({
 })
 
 module.exports = mongoose.model("salarypostdata",salarypost);
+//sorry
